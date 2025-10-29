@@ -1,86 +1,94 @@
-import authService from "../appwrite/auth";
-import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import Button from "./Button";
-import Input from "./Input";
-import Logo from "./Logo";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { login } from "../store/authSlice";
+import authService from "../appwrite/auth"
+import { Link, useNavigate } from "react-router-dom"
+import React, { useState } from "react"
+import Button from "./Button"
+import Input from "./Input"
+import Logo from "./Logo"
+import { useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
+import { login } from "../store/authSlice"
 
 function Signup() {
-    const navigate = useNavigate();
-    const [error, setError] = useState("");
-    const dispatch = useDispatch();
-    const { register, handleSubmit } = useForm();
+  const navigate = useNavigate()
+  const [error, setError] = useState("")
+  const dispatch = useDispatch()
+  const { register, handleSubmit } = useForm()
 
-    const create = async (data) => {
-        setError("");
-        try {
-            console.log("Signup form data:", data);
+  const create = async (data) => {
+    setError("")
+    try {
+      const session = await authService.createAccount(data)
+      if (!session) throw new Error("Account creation failed")
 
-            const session = await authService.createAccount(data);
-            if (!session) throw new Error("Account creation failed");
+      const user = await authService.getCurrentUser()
+      if (!user) throw new Error("Failed to fetch user after login")
 
-            const user = await authService.getCurrentUser();
-            if (!user) throw new Error("Failed to fetch user after login");
+      dispatch(login({ userData: user }))
+      navigate("/")
+    } catch (error) {
+      setError(error.message)
+    }
+  }
 
-            dispatch(login({ userData: user }));
-            navigate("/");
-        } catch (error) {
-            console.error("Signup error:", error.message);
-            setError(error.message);
-        }
-    };
-
-    return (
-        <div className="flex items-center justify-center">
-            <div className="mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10">
-                <div className="mb-2 flex justify-center">
-                    <span className="inline-block w-full max-w-[100px]">
-                        <Logo width="100%" />
-                    </span>
-                </div>
-                <h2 className="text-center text-2xl font-bold leading-tight">
-                    Sign up to create account
-                </h2>
-                <p className="mt-2 text-center text-base text-black/60">
-                    Already have an account?&nbsp;
-                    <Link
-                        to="/login"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
-                    >
-                        Sign In
-                    </Link>
-                </p>
-                {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-                <form onSubmit={handleSubmit(create)} className="mt-8">
-                    <div className="space-y-5">
-                        <Input
-                            {...register("name", { required: true })}
-                            label="Full Name : "
-                            placeholder="Full Name"
-                        />
-                        <Input
-                            {...register("email", { required: true })}
-                            label="Email : "
-                            placeholder="Email Address"
-                            type="email"
-                        />
-                        <Input
-                            {...register("password", { required: true })}
-                            label="Password : "
-                            type="password"
-                            placeholder="Password"
-                        />
-                        <Button type="submit" className="w-full">
-                            Create Account
-                        </Button>
-                    </div>
-                </form>
-            </div>
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-cyan-100 to-indigo-200 px-4">
+      <div className="w-full max-w-md bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-blue-300 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-300">
+        {/* Logo */}
+        <div className="mb-6 flex justify-center">
+          <Logo width="90px" />
         </div>
-    );
+
+        {/* Title */}
+        <h2 className="text-center text-3xl font-extrabold text-gray-800 tracking-tight mb-2">
+          Create Your Account ✨
+        </h2>
+        <p className="text-center text-base text-gray-600">
+          Already have an account?{" "}
+          <Link
+            to="/login"
+            className="font-semibold text-indigo-600 hover:underline transition duration-200"
+          >
+            Sign In
+          </Link>
+        </p>
+
+        {/* Error */}
+        {error && (
+          <p className="text-red-600 mt-6 text-center font-medium">{error}</p>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit(create)} className="mt-8 space-y-6">
+          <Input
+            {...register("name", { required: true })}
+            label="Full Name"
+            placeholder="John Doe"
+            className="w-full px-4 py-2 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+          />
+          <Input
+            {...register("email", { required: true })}
+            label="Email"
+            placeholder="you@example.com"
+            type="email"
+            className="w-full px-4 py-2 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+          />
+          <Input
+            {...register("password", { required: true })}
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            className="w-full px-4 py-2 rounded-xl bg-white/80 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+          />
+          <Button
+            type="submit"
+            className="w-full py-2 rounded-full bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition duration-300 shadow-md"
+          >
+            Create Account
+          </Button>
+        </form>
+      </div>
+    </div>
+  )
 }
 
-export default Signup;
+export default Signup
