@@ -1,1 +1,1 @@
-# React + Vite
+# Blog App (React)
