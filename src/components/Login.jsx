@@ -29,7 +29,7 @@ function Login() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-200 via-cyan-100 to-indigo-200 px-4">
+    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-blue-200 via-cyan-100 to-indigo-200 px-4">
       <div className="w-full max-w-md bg-white/60 backdrop-blur-xl rounded-3xl p-8 border border-blue-300 shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] transition-all duration-300">
         {/* Logo */}
         <div className="mb-6 flex justify-center">
