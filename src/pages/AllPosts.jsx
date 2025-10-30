@@ -16,7 +16,6 @@ function AllPosts() {
       }
     })
   }, [])
-  //TODO: add case for array length 0
   return (
     <div className='w-full py-8'>
       <Container>
