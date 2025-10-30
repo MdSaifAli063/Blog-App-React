@@ -10,12 +10,22 @@ function Header() {
   const navigate = useNavigate()
 
   const navItems = [
-    { name: "Home", slug: "/", active: true },
-    { name: "Login", slug: "/login", active: !authStatus },
-    { name: "Signup", slug: "/signup", active: !authStatus },
-    { name: "All Posts", slug: "/all-posts", active: authStatus },
-    { name: "Add Post", slug: "/add-post", active: authStatus }
+    { name: "Home", slug: "/", active: true, color: "gray" },
+    { name: "Login", slug: "/login", active: !authStatus, color: "blue" },
+    { name: "Signup", slug: "/signup", active: !authStatus, color: "green" },
+    { name: "All Posts", slug: "/all-posts", active: authStatus, color: "gray" },
+    { name: "Add Post", slug: "/add-post", active: authStatus, color: "gray" }
   ]
+
+  const getButtonClasses = (color) => {
+    const base = "px-5 py-2 font-medium rounded-full transition-all duration-300 shadow-sm border"
+    const themes = {
+      blue: "bg-blue-600 text-white hover:bg-blue-700 border-blue-600",
+      green: "bg-green-600 text-white hover:bg-green-700 border-green-600",
+      gray: "bg-white/80 text-gray-700 hover:bg-indigo-100 hover:text-indigo-700 border-gray-300"
+    }
+    return `${base} ${themes[color] || themes.gray}`
+  }
 
   return (
     <header className="bg-gradient-to-r from-blue-200/70 via-cyan-100/70 to-indigo-200/70 backdrop-blur-md shadow-md border-b border-blue-300 h-16">
@@ -35,7 +45,7 @@ function Header() {
                 <li key={item.name}>
                   <button
                     onClick={() => navigate(item.slug)}
-                    className="px-5 py-2 text-gray-700 font-medium rounded-full transition-all duration-300 bg-white/80 hover:bg-indigo-100 hover:text-indigo-700 shadow-sm border border-gray-300"
+                    className={getButtonClasses(item.color)}
                   >
                     {item.name}
                   </button>
