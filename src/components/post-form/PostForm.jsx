@@ -30,26 +30,29 @@ export default function PostForm({ post }) {
 
   const submit = async (data) => {
     try {
-      let fileId = post?.featuredImage
+      if (!userData?.$id) throw new Error("User not authenticated")
+
+      let fileId = post?.featuredimage
 
       if (data.image?.[0]) {
         const file = await appwriteService.uploadFile(data.image[0])
         if (file) {
-          if (post?.featuredImage) {
-            await appwriteService.deleteFile(post.featuredImage)
+          if (post?.featuredimage) {
+            await appwriteService.deleteFile(post.featuredimage)
           }
           fileId = file.$id
         }
       }
 
       const payload = {
-        title: data.title,
-        slug: data.slug,
-        content: data.content,
-        featuredImage: fileId,
-        status: data.status || "active",
-        userId: userData.$id
-      }
+  title: data.title,
+  content: data.content,
+  featuredimage: fileId, // ✅ lowercase to match Appwrite schema
+  status: data.status || "active",
+  userid: userData.$id
+}
+
+if (data.slug) payload.slug = data.slug
 
       const dbPost = post
         ? await appwriteService.updatePost(post.$id, payload)
@@ -59,7 +62,7 @@ export default function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`)
       }
     } catch (error) {
-      console.error("Post submission failed:", error)
+      console.error("Post submission failed:", error.message)
     }
   }
 
@@ -124,10 +127,10 @@ export default function PostForm({ post }) {
             accept="image/png, image/jpg, image/jpeg"
             {...register("image", { required: !post })}
           />
-          {post?.featuredImage && (
+          {post?.featuredimage && (
             <div className="w-full mb-4">
               <img
-                src={appwriteService.getFilePreview(post.featuredImage)}
+                src={appwriteService.getFilePreview(post.featuredimage)}
                 alt={post.title}
                 className="rounded-lg w-full object-cover"
               />

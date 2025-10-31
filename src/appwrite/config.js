@@ -1,5 +1,5 @@
 import conf from "../conf/conf"
-import { Client, Databases, Storage, Query, ID } from "appwrite"
+import { Client, Databases, Storage, Query, ID, Account } from "appwrite"
 
 export class Service {
   client = new Client()
@@ -13,9 +13,9 @@ export class Service {
   }
 
   // Validation helpers
-  validateUserId(userId) {
+  validateUserId(userid) {
     const regex = /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,35}$/
-    return regex.test(userId)
+    return regex.test(userid)
   }
 
   validateSlug(slug) {
@@ -53,23 +53,32 @@ export class Service {
     }
   }
 
-  // Create a new post with unique ID
-  async createPost({ title, slug, content, featuredimage, status, userId }) {
-    try {
-      if (!this.validateUserId(userId)) throw new Error("Invalid userId format.")
-      if (!this.validateSlug(slug)) throw new Error("Invalid slug format.")
+  async createPost({ title, content, featuredimage, status, userid, slug }) {
+  try {
+    if (!this.validateUserId(userid)) throw new Error("Invalid userid format.")
 
-      return await this.databases.createDocument(
-        conf.appwriteDatabaseId,
-        conf.appwriteCollectionId,
-        ID.unique(),
-        { title, slug, content, featuredimage, status, userId }
-      )
-    } catch (error) {
-      console.log("Appwrite service :: createPost() ::", error.message)
-      return false
+    const payload = {
+      title,
+      content,
+      featuredimage,
+      status,
+      userid
     }
+
+    // Only include slug if your schema has it
+    if (slug) payload.slug = slug
+
+    return await this.databases.createDocument(
+      conf.appwriteDatabaseId,
+      conf.appwriteCollectionId,
+      ID.unique(),
+      payload
+    )
+  } catch (error) {
+    console.log("Appwrite service :: createPost() ::", error.message)
+    return false
   }
+}
 
   // Update post by document ID
   async updatePost(postId, { title, slug, content, featuredimage, status }) {
