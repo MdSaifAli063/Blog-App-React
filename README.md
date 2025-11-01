@@ -78,3 +78,6 @@ npm run dev
 > App runs locally at http://localhost:5173
 
 ## 📸 Screenshots
+| Home Page                                                   | Create Post                                                     | View Post                                                   |
+| ----------------------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------------- |
+| ![Home](https://via.placeholder.com/300x160?text=Home+Page) | ![Create](https://via.placeholder.com/300x160?text=Create+Post) | ![View](https://via.placeholder.com/300x160?text=View+Post) |
