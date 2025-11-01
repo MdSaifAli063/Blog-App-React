@@ -39,6 +39,21 @@ export class Service {
     }
   }
 
+  // Get a single post by document ID
+  async getPostById(postId) {
+    try {
+      if (!postId) throw new Error("Post ID is required.")
+      return await this.databases.getDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        postId
+      )
+    } catch (error) {
+      console.log("Appwrite service :: getPostById() ::", error.message)
+      return false
+    }
+  }
+
   // Get all active posts
   async getPosts(queries = [Query.equal("status", "active")]) {
     try {
@@ -132,7 +147,36 @@ export class Service {
 
   // Get image preview URL
   getFilePreview(fileId) {
-    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId).href
+    try {
+      if (!fileId) {
+        console.warn("getFilePreview: fileId is missing")
+        return null
+      }
+      
+      // Try getFilePreview first (for resized/preview images)
+      let preview = this.bucket.getFilePreview(conf.appwriteBucketId, fileId)
+      
+      // If preview is null or undefined, try getFileView (for original file)
+      if (!preview) {
+        console.log("getFilePreview returned null, trying getFileView...")
+        preview = this.bucket.getFileView(conf.appwriteBucketId, fileId)
+      }
+      
+      // Appwrite methods return a URL object, access .href or .toString()
+      if (preview) {
+        const url = typeof preview === 'string' 
+          ? preview 
+          : (preview.href || preview.toString() || String(preview))
+        console.log("Generated preview URL:", url, "for fileId:", fileId)
+        return url
+      }
+      
+      console.warn("No preview URL available for fileId:", fileId)
+      return null
+    } catch (error) {
+      console.error("Appwrite service :: getFilePreview() ::", error.message, error)
+      return null
+    }
   }
 
   // Get current user (with error handling)
