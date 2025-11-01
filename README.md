@@ -102,3 +102,7 @@ npm run dev
 Md Saif Ali
 
 💼 Front-End Developer | 🎨 UI/UX Enthusiast
+
+## 🏷️ License
+
+This project is open-source and available under the MIT License.
