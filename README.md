@@ -42,3 +42,10 @@ Users can create, edit, and delete their own posts with secure authentication po
 | Tools | 🧑‍💻 VS Code, 🌍 GitHub, 🚀 Netlify / Vercel |
 
 ---
+## 🛠️ Installation
+
+### 1️⃣ Clone the repository  
+```bash
+git clone https://github.com/your-username/myblog.git
+cd myblog
+```
