@@ -20,4 +20,15 @@ Users can create, edit, and delete their own posts with secure authentication po
 ✨ Clean design, 🌈 soft gradients, and 🔒 authentication make it a perfect personal blog project.
 
 ---
+## 🚀 Features
 
+- 🧑‍💻 **User Authentication** (Signup, Login, Logout)  
+- 📰 **Create, Edit, Delete, and View Posts**  
+- 🖼️ **Upload Featured Images** for posts  
+- 🌐 **Dynamic Routing** using React Router  
+- 💅 **Modern UI with Tailwind CSS**  
+- 🧭 **Protected Routes** for logged-in users  
+- 🔄 **Auto-login state handling** with Redux  
+- 📱 **Fully Responsive** and mobile-friendly  
+
+---
