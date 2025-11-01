@@ -53,3 +53,12 @@ cd myblog
 ```bash
 npm install
 ```
+3️⃣ Set up Appwrite
+
+- Create a Project in Appwrite Cloud
+
+Set up:
+
+- Database with a posts collection
+- Storage bucket for featured images
+- Add API endpoint and project ID in a config file:
