@@ -71,4 +71,4 @@ export default {
   appwriteBucketId: "your_bucket_id",
 }
 ```
-4️⃣ Run the development server
+### 4️⃣ Run the development server
