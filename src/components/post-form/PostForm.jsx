@@ -32,37 +32,47 @@ export default function PostForm({ post }) {
     try {
       if (!userData?.$id) throw new Error("User not authenticated")
 
-      let fileId = post?.featuredimage
+      let fileId = post?.featuredimage || null
 
       if (data.image?.[0]) {
         const file = await appwriteService.uploadFile(data.image[0])
-        if (file) {
+        if (file && file.$id) {
           if (post?.featuredimage) {
             await appwriteService.deleteFile(post.featuredimage)
           }
           fileId = file.$id
+          console.log("Image uploaded successfully, file ID:", fileId)
+        } else {
+          console.error("File upload failed or returned invalid response")
+          throw new Error("Failed to upload image")
         }
       }
 
       const payload = {
-  title: data.title,
-  content: data.content,
-  featuredimage: fileId, // ✅ lowercase to match Appwrite schema
-  status: data.status || "active",
-  userid: userData.$id
-}
+        title: data.title,
+        content: data.content,
+        featuredimage: fileId || null,
+        status: data.status || "active",
+        userid: userData.$id
+      }
 
-if (data.slug) payload.slug = data.slug
+      if (data.slug) payload.slug = data.slug
+
+      console.log("Submitting post with payload:", { ...payload, content: "[content]" })
 
       const dbPost = post
         ? await appwriteService.updatePost(post.$id, payload)
         : await appwriteService.createPost(payload)
 
       if (dbPost) {
+        console.log("Post saved successfully:", dbPost.$id, "Featured image:", dbPost.featuredimage)
         navigate(`/post/${dbPost.$id}`)
+      } else {
+        throw new Error("Failed to save post")
       }
     } catch (error) {
       console.error("Post submission failed:", error.message)
+      alert(`Error: ${error.message}`)
     }
   }
 
