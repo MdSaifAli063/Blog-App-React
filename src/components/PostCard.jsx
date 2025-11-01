@@ -1,9 +1,11 @@
-import React from 'react'
-import { Link } from "react-router-dom"
-import appwriteService from "../appwrite/config.js"
+import React from "react";
+import { Link } from "react-router-dom";
+import appwriteService from "../appwrite/config.js";
 
 function PostCard({ $id, title, featuredimage }) {
-  const imageUrl = featuredimage ? appwriteService.getFilePreview(featuredimage) : null
+  const imageUrl = featuredimage
+    ? appwriteService.getFilePreview(featuredimage)
+    : null;
 
   return (
     <Link to={`/post/${$id}`}>
@@ -24,7 +26,7 @@ function PostCard({ $id, title, featuredimage }) {
         </h2>
       </div>
     </Link>
-  )
+  );
 }
 
-export default PostCard
+export default PostCard;
