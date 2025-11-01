@@ -32,3 +32,13 @@ Users can create, edit, and delete their own posts with secure authentication po
 - 📱 **Fully Responsive** and mobile-friendly  
 
 ---
+## 🧩 Tech Stack
+
+| Category | Technologies |
+|-----------|---------------|
+| Frontend | ⚛️ React, 🌀 Vite, 🧭 React Router, 🧱 Redux |
+| Backend | 🧰 Appwrite (Database, Auth, File Storage) |
+| Styling | 🎨 Tailwind CSS |
+| Tools | 🧑‍💻 VS Code, 🌍 GitHub, 🚀 Netlify / Vercel |
+
+---
