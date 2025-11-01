@@ -72,3 +72,7 @@ export default {
 }
 ```
 ### 4️⃣ Run the development server
+```bash
+npm run dev
+```
+> App runs locally at http://localhost:5173
