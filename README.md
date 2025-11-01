@@ -62,3 +62,12 @@ Set up:
 - Database with a posts collection
 - Storage bucket for featured images
 - Add API endpoint and project ID in a config file:
+```js
+export default {
+  appwriteUrl: "https://cloud.appwrite.io/v1",
+  appwriteProjectId: "your_project_id",
+  appwriteDatabaseId: "your_database_id",
+  appwriteCollectionId: "your_collection_id",
+  appwriteBucketId: "your_bucket_id",
+}
+```
