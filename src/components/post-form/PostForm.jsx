@@ -86,7 +86,7 @@ if (data.slug) payload.slug = data.slug
   }, [watch, slugTransform, setValue])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-cyan-100 to-indigo-200 py-10 px-4 flex justify-center items-start">
+    <div className="min-h-screen py-10 px-4 flex justify-center items-start">
       <form
         onSubmit={handleSubmit(submit)}
         className="w-full max-w-5xl bg-white/60 backdrop-blur-md rounded-2xl p-8 shadow-xl border border-blue-300 flex flex-wrap gap-6"
