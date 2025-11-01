@@ -97,3 +97,8 @@ npm run dev
  ┣ 📜 package.json
  ┗ 📜 README.md
 ```
+## 👨‍💻 Author
+
+Md Saif Ali
+
+💼 Front-End Developer | 🎨 UI/UX Enthusiast
