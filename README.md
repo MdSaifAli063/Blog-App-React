@@ -108,3 +108,5 @@ Md Saif Ali
 This project is open-source and available under the MIT License.
 
 <div align="center"> <p>✨ Made with ❤️ using <b>React</b> & <b>Appwrite</b> ✨</p> </div>
+
+---
