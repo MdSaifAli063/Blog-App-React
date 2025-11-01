@@ -53,7 +53,7 @@ cd myblog
 ```bash
 npm install
 ```
-3️⃣ Set up Appwrite
+### 3️⃣ Set up Appwrite
 
 - Create a Project in Appwrite Cloud
 
@@ -71,3 +71,4 @@ export default {
   appwriteBucketId: "your_bucket_id",
 }
 ```
+4️⃣ Run the development server
