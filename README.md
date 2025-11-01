@@ -76,3 +76,5 @@ export default {
 npm run dev
 ```
 > App runs locally at http://localhost:5173
+
+## 📸 Screenshots
