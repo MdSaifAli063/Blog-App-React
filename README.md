@@ -49,3 +49,7 @@ Users can create, edit, and delete their own posts with secure authentication po
 git clone https://github.com/your-username/myblog.git
 cd myblog
 ```
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
