@@ -12,3 +12,12 @@
 </div>
 
 ---
+## 🌟 Overview
+
+**MyBlog** is a modern, fully responsive blogging platform built using **React**, **Appwrite**, and **Tailwind CSS**.  
+Users can create, edit, and delete their own posts with secure authentication powered by Appwrite.  
+
+✨ Clean design, 🌈 soft gradients, and 🔒 authentication make it a perfect personal blog project.
+
+---
+
