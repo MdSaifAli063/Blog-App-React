@@ -83,3 +83,17 @@ npm run dev
 | ![Home](https://via.placeholder.com/300x160?text=Home+Page) | ![Create](https://via.placeholder.com/300x160?text=Create+Post) | ![View](https://via.placeholder.com/300x160?text=View+Post) |
 
 ## 🧠 Folder Structure
+```bash
+📦 myblog
+ ┣ 📂 src
+ ┃ ┣ 📂 appwrite        # Appwrite config & services
+ ┃ ┣ 📂 components      # Reusable UI components
+ ┃ ┣ 📂 pages           # Page components (Home, Post, EditPost, etc.)
+ ┃ ┣ 📂 store           # Redux slices
+ ┃ ┣ 📜 App.jsx         # Main component with routing
+ ┃ ┣ 📜 main.jsx        # React entry file
+ ┃ ┗ 📜 index.css       # Global styles
+ ┣ 📜 vite.config.js
+ ┣ 📜 package.json
+ ┗ 📜 README.md
+```
