@@ -15,8 +15,14 @@ function EditPost() {
   useEffect(() => {
     if (slug) {
       setLoading(true);
-      appwriteService
-        .getPost(slug)
+      // Try to get by ID first (if slug looks like an ID), otherwise try slug
+      const isIdFormat = slug.length === 36 || slug.length === 30; // Appwrite IDs are typically 36 or 30 chars
+      
+      const fetchPost = isIdFormat 
+        ? appwriteService.getPostById(slug)
+        : appwriteService.getPost(slug);
+      
+      fetchPost
         .then((result) => {
           if (result) {
             // ✅ Check ownership before allowing edit
