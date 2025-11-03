@@ -46,6 +46,8 @@
 
 ---
 
+## 📸 Screenshots
+
 ## 🛠 Tech Stack
 
 ### Frontend
